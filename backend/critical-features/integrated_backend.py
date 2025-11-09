@@ -755,12 +755,21 @@ def init_database():
         
         # Create admin user if not exists
         if not User.query.filter_by(username='admin').first():
+            # Use environment variable for admin password, with secure default
+            admin_password = os.getenv('ADMIN_PASSWORD')
+            if not admin_password:
+                # Generate secure random password if not provided
+                import string
+                admin_password = ''.join(secrets.choice(string.ascii_letters + string.digits + '!@#$%^&*') for _ in range(16))
+                print("⚠️  SECURITY WARNING: Generated random admin password. Please set ADMIN_PASSWORD environment variable.")
+                print(f"   Generated password: {admin_password}")
+            
             admin_user = User(
-                username='admin',
-                email='admin@globalperspective.news',
-                password_hash=generate_password_hash('admin123'),
-                first_name='Admin',
-                last_name='User',
+                username=os.getenv('ADMIN_USERNAME', 'admin'),
+                email=os.getenv('ADMIN_EMAIL', 'admin@globalperspective.news'),
+                password_hash=generate_password_hash(admin_password),
+                first_name=os.getenv('ADMIN_FIRST_NAME', 'Admin'),
+                last_name=os.getenv('ADMIN_LAST_NAME', 'User'),
                 role='admin',
                 is_active=True,
                 is_email_verified=True,
@@ -769,7 +778,7 @@ def init_database():
             
             db.session.add(admin_user)
             db.session.commit()
-            print("✅ Admin user created (username: admin, password: admin123)")
+            print("✅ Admin user created with secure password from environment variables")
         
         # Create sample article
         if not Article.query.first():
@@ -833,9 +842,11 @@ if __name__ == '__main__':
     print("✅ User Dashboard")
     print("✅ Rate Limiting")
     print("\n🚀 Server running on http://0.0.0.0:5000")
-    print("\n📝 Test credentials:")
-    print("   Username: admin")
-    print("   Password: admin123")
+    print("\n📝 Admin credentials:")
+    print("   Username: Set via ADMIN_USERNAME environment variable (default: admin)")
+    print("   Password: Set via ADMIN_PASSWORD environment variable (secure random if not set)")
+    print("   Email: Set via ADMIN_EMAIL environment variable")
+    print("\n⚠️  SECURITY: Always set environment variables in production!")
     
     app.run(host='0.0.0.0', port=5000, debug=True)
 

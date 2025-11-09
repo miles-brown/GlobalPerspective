@@ -112,11 +112,44 @@ media/
 config/secrets.json
 *.key
 *.pem
+secrets.txt
+credentials.json
+api_keys.txt
+tokens.txt
+
+# Email service configurations
+email_config.py
+smtp_config.py
+sendgrid_config.py
+mailgun_config.py
 
 # Database
 *.db
 *.sqlite3
 database.db
+globalperspective.db
+
+# Environment files with sensitive data
+.env.*
+*.env
+local_settings.py
+development.py
+
+# SSL Certificates
+*.crt
+*.cert
+*.ca-bundle
+
+# Session and authentication data
+flask_session/
+sessions/
+auth_tokens/
+
+# User uploads and sensitive media
+uploads/sensitive/
+media/user_data/
+exports/
+backups/
 
 # AI model files
 models/
