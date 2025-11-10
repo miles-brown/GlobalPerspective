@@ -37,8 +37,11 @@ import {
   MapPin,
   ExternalLink
 } from 'lucide-react'
+import WYSIWYGEditor from './WYSIWYGEditor.jsx'
+import EnhancedCommentSystem from './EnhancedCommentSystem.jsx'
+import AdvancedSearchSystem from './AdvancedSearchSystem.jsx'
 
-const API_BASE = 'http://localhost:5000/api/admin'
+const API_BASE = 'http://localhost:5001/api/admin'
 
 // Utility Components
 const Button = ({ children, variant = 'primary', size = 'md', onClick, disabled, className = '', ...props }) => {

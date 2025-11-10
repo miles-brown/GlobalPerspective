@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate 
 import { Search, Menu, Globe, User, Settings, PenTool, Bell, Bookmark, Share2, Heart, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button.jsx'
 import CMS from './components/CMS.jsx'
+import EnhancedCommentSystem from './components/EnhancedCommentSystem.jsx'
+import AdvancedSearchSystem from './components/AdvancedSearchSystem.jsx'
+import WYSIWYGEditor from './components/WYSIWYGEditor.jsx'
+import AdminDashboard from './components/AdminDashboard.jsx'
 import { 
   BannerAd, 
   NativeAd, 
